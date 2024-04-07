@@ -9,7 +9,17 @@
         android:id="@+id/navigation_log"
         android:name="com.jojobearfitness.LogFragment"
         android:label="@string/log"
-        tools:layout="@layout/fragment_log" />
+        tools:layout="@layout/fragment_log">
+        <action
+            android:id="@+id/action_logFragment_to_newEntryFragment"
+            app:destination="@id/navigation_new_entry" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_new_entry"
+        android:name="com.jojobearfitness.NewEntryFragment"
+        android:label="@string/new_entry"
+        tools:layout="@layout/fragment_new_entry" />
 
     <fragment
         android:id="@+id/navigation_dashboard"
