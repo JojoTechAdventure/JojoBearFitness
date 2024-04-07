@@ -18,7 +18,7 @@ class NewEntryActivity : AppCompatActivity() {
 
         binding.btnRecord.setOnClickListener {
             val foodName = binding.etFoodName.text.toString().trim()
-            val calorieString = binding.etCalories.text.toString() 
+            val calorieString = binding.etCalories.text.toString()
             viewModel.insert(foodName, calorieString)
             finish()
         }
