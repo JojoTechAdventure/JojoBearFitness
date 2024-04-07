@@ -14,9 +14,9 @@ class NewEntryActivity : AppCompatActivity() {
         binding = ActivityNewEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
 
-        binding.btnSave.setOnClickListener {
+        binding.btnRecord.setOnClickListener {
             val foodName = binding.etFoodName.text.toString().trim()
             val calories = binding.etCalories.text.toString().toIntOrNull()
             if (foodName.isNotEmpty() && calories != null) {

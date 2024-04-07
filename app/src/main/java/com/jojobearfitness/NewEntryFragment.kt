@@ -14,21 +14,17 @@ class NewEntryFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
-        _binding = FragmentNewEntryBinding.inflate(inflater, container, false).apply {
-            viewModel = this@NewEntryFragment.viewModel
-            lifecycleOwner = viewLifecycleOwner
-        }
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentNewEntryBinding.inflate(inflater, container, false)
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
-}
-
-override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
     }

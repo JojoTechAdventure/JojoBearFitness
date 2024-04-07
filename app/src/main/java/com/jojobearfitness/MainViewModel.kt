@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: HealthMetricRepository
+    // Initialize the repository immediately, not inside init block
+    private val healthMetricDao = AppDatabase.getDatabase(application).healthMetricDao()
+    private val repository = HealthMetricRepository(healthMetricDao)
     val allHealthMetrics = MutableLiveData<List<HealthMetric>>()
 
     // MutableLiveDatas for UI text display
@@ -17,8 +19,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val maxCalories = MutableLiveData<String>()
 
     init {
-        val healthMetricDao = AppDatabase.getDatabase(application).healthMetricDao()
-        repository = HealthMetricRepository(healthMetricDao)
+        // Loading metrics when the ViewModel is created
         loadMetrics()
     }
 
@@ -30,18 +31,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private fun updateMetricsDisplay(metrics: List<HealthMetric>) {
-        // Calculate average, min, and max calories from the metrics list
-        // Placeholder for actual implementation
+        // Placeholder for actual calculations
         averageCalories.postValue("Calculate average")
         minCalories.postValue("Calculate min")
         maxCalories.postValue("Calculate max")
     }
 
-    fun insert(healthMetric: HealthMetric) = viewModelScope.launch {
-        repository.insert(healthMetric)
+    fun insert(foodName: String, calorieString: String) = viewModelScope.launch {
+        val calories = calorieString.toIntOrNull()
+        if (foodName.isNotBlank() && calories != null) {
+            repository.insert(HealthMetric(foodName = foodName, calories = calories))
+        } else {
+            // Handle invalid input
+        }
     }
 
     fun deleteAll() = viewModelScope.launch {
         repository.deleteAll()
     }
 }
+
