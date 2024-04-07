@@ -14,18 +14,13 @@ class NewEntryActivity : AppCompatActivity() {
         binding = ActivityNewEntryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
 
         binding.btnRecord.setOnClickListener {
             val foodName = binding.etFoodName.text.toString().trim()
-            val calories = binding.etCalories.text.toString().toIntOrNull()
-            if (foodName.isNotEmpty() && calories != null) {
-                val healthMetric = HealthMetric(foodName = foodName, calories = calories)
-                viewModel.insert(healthMetric)
-                finish()
-            } else {
-                // Handle error
-            }
+            val calorieString = binding.etCalories.text.toString() 
+            viewModel.insert(foodName, calorieString)
+            finish()
         }
     }
 }
