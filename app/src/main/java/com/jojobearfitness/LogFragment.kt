@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojobearfitness.databinding.FragmentLogBinding
+import kotlinx.coroutines.launch
 
 class LogFragment : Fragment() {
     private var _binding: FragmentLogBinding? = null
@@ -18,9 +20,7 @@ class LogFragment : Fragment() {
     private lateinit var healthMetricAdapter: HealthMetricAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         _binding = FragmentLogBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         return binding.root
@@ -37,7 +37,7 @@ class LogFragment : Fragment() {
         }
 
         binding.btnClearData.setOnClickListener {
-            viewModel.clearHealthMetrics()
+            viewModel.deleteAll()
         }
     }
 
@@ -50,8 +50,11 @@ class LogFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModel.allHealthMetrics.observe(viewLifecycleOwner) { healthMetrics ->
-            healthMetricAdapter.submitList(healthMetrics)
+        // Collect the Flow from the ViewModel
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.allHealthMetricsFlow.collect { healthMetrics ->
+                healthMetricAdapter.submitList(healthMetrics)
+            }
         }
     }
 
@@ -60,3 +63,4 @@ class LogFragment : Fragment() {
         _binding = null
     }
 }
+

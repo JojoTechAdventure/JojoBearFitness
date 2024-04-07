@@ -1,12 +1,12 @@
 package com.jojobearfitness
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HealthMetricDao {
     @Query("SELECT * FROM health_metric ORDER BY id DESC")
-    fun getAllFoodEntries(): LiveData<List<HealthMetric>>
+    fun getAllFoodEntries(): Flow<List<HealthMetric>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(healthMetric: HealthMetric)

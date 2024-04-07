@@ -21,11 +21,16 @@ class NewEntryFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnRecord.setOnClickListener {
-            val foodName = binding.etFoodName.text.toString()
-            val calories = binding.etCalories.text.toString().toIntOrNull() ?: return@setOnClickListener
-            viewModel.insert(foodName, calories)
+            val foodName = binding.etFoodName.text.toString().trim()
+            val calorieInput = binding.etCalories.text.toString().trim()
+            if (foodName.isNotEmpty() && calorieInput.isNotEmpty()) {
+                viewModel.insert(foodName, calorieInput)
+            } else {
+                // Optionally show an error message to the user.
+            }
         }
     }
+
 
 
     override fun onDestroyView() {
