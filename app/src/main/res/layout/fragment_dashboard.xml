@@ -3,33 +3,64 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="com.jojobearfitness.MainViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/dashboardLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".DashboardFragment">
 
-        <!-- Example UI elements for DashboardFragment -->
         <TextView
-            android:id="@+id/dashboardTitle"
+            android:id="@+id/tvAverageCalories"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Dashboard"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintTop_toTopOf="parent"
+            android:text="@{`Average Calories: ` + viewModel.averageCalories}"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="16dp"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/tvMinCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Minimum Calories: ` + viewModel.minCalories}"
+            app:layout_constraintStart_toStartOf="@id/tvAverageCalories"
+            app:layout_constraintTop_toBottomOf="@id/tvAverageCalories"
+            android:layout_marginTop="8dp"/>
+
+        <TextView
+            android:id="@+id/tvMaxCalories"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{`Maximum Calories: ` + viewModel.maxCalories}"
+            app:layout_constraintStart_toStartOf="@id/tvMinCalories"
+            app:layout_constraintTop_toBottomOf="@id/tvMinCalories"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btnClearData"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear Data"
+            app:layout_constraintStart_toStartOf="@id/tvMaxCalories"
+            app:layout_constraintTop_toBottomOf="@id/tvMaxCalories"
+            android:layout_marginTop="16dp"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/healthMetricsList"
+            android:id="@+id/rvHealthMetrics"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/dashboardTitle"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btnClearData"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="16dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

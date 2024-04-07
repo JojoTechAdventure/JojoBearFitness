@@ -5,4 +5,7 @@
     <string name="save_button_text">save button</string>
     <string name="log">Log</string>
     <string name="dashboard">Dashboard</string>
+    <string name="enter_food_name">Enter Food Name</string>
+    <string name="enter_calories">Enter Calories</string>
+    <string name="record_this_food">RECORD THIS FOOD</string>
 </resources>

@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.jojobearfitness.databinding.FragmentDashboardBinding
 
 class DashboardFragment : Fragment() {
@@ -15,29 +14,17 @@ class DashboardFragment : Fragment() {
 
     private val viewModel: MainViewModel by viewModels()
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentDashboardBinding.inflate(inflater, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
+        _binding = FragmentDashboardBinding.inflate(inflater, container, false).apply {
+            viewModel = this@DashboardFragment.viewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        // Initialize your HealthMetricAdapter
-        val adapter = HealthMetricAdapter()
-
-        // Set up the RecyclerView
-        binding.healthMetricsList.layoutManager = LinearLayoutManager(context)
-        binding.healthMetricsList.adapter = adapter
-
-        // Observe the LiveData from your ViewModel
-        viewModel.allHealthMetrics.observe(viewLifecycleOwner) { healthMetrics ->
-            // Whenever data changes, update your adapter
-            adapter.updateData(healthMetrics)
-        }
+        // RecyclerView and Adapter setup would be done here
     }
 
     override fun onDestroyView() {
@@ -45,4 +32,3 @@ class DashboardFragment : Fragment() {
         _binding = null
     }
 }
-

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface HealthMetricDao {
-    @Query("SELECT * FROM health_metric")
+    @Query("SELECT * FROM health_metric ORDER BY id DESC")
     fun getAllFoodEntries(): Flow<List<HealthMetric>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)

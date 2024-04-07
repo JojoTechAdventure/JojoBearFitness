@@ -9,36 +9,31 @@
         android:id="@+id/etFoodName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter food name"
+        android:hint="@string/enter_food_name"
+        android:inputType="text"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:ems="10"
-        android:inputType="text"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <EditText
         android:id="@+id/etCalories"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="Enter calories"
+        android:hint="@string/enter_calories"
+        android:inputType="number"
         app:layout_constraintTop_toBottomOf="@id/etFoodName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:ems="10"
-        android:inputType="number"
-        android:layout_marginTop="8dp"/>
+        app:layout_constraintHorizontal_bias="0.5" />
 
     <Button
-        android:id="@+id/btnSave"
+        android:id="@+id/btnRecord"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Record Food Item"
+        android:text="@string/record_this_food"
         app:layout_constraintTop_toBottomOf="@id/etCalories"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        android:layout_marginTop="16dp"/>
+        app:layout_constraintHorizontal_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

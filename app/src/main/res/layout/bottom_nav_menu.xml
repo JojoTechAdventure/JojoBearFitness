@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- This references your log button vector asset -->
     <item
         android:id="@+id/navigation_log"
         android:icon="@drawable/log_button"
         android:title="@string/log" />
-
     <item
         android:id="@+id/navigation_dashboard"
         android:icon="@drawable/data_button"
         android:title="@string/dashboard" />
-
 </menu>
