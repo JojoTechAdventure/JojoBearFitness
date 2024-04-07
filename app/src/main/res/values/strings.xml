@@ -3,4 +3,6 @@
     <string name="food_name_hint">food name</string>
     <string name="calories_hint">calories</string>
     <string name="save_button_text">save button</string>
+    <string name="log">Log</string>
+    <string name="dashboard">Dashboard</string>
 </resources>
